@@ -3,36 +3,28 @@ const fakeFetch = ({
   lastName,
   email,
   city,
-  street,
   house,
+  street,
   zipcode,
 }) =>
   new Promise((success, failure) => {
     setTimeout(() => {
-      if (
-        firstName !== '' &&
-        lastName !== '' &&
-        email !== '' &&
-        city !== '' &&
-        street !== '' &&
-        house !== '' &&
-        zipcode !== ''
-      ) {
+      if (email !== '' && city !== '') {
         success({
-          firstName,
-          lastName,
-          email,
-          city,
-          street,
-          house,
-          zipcode,
+          token: 'dkas;jgsdndfd',
           user: {
             id: '1234',
-            email: 'frontend@isawesome.com',
+            firstName,
+            lastName,
+            email,
+            city,
+            house,
+            street,
+            zipcode,
           },
         });
       } else {
-        failure(new Error('Missing information!'));
+        failure(new Error('Incorect email or/and password'));
       }
     }, 2000);
   });
@@ -42,8 +34,8 @@ const login = async ({
   lastName,
   email,
   city,
-  street,
   house,
+  street,
   zipcode,
 }) => {
   const response = await fakeFetch({
@@ -51,8 +43,8 @@ const login = async ({
     lastName,
     email,
     city,
-    street,
     house,
+    street,
     zipcode,
   });
   return response;
