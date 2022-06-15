@@ -14,6 +14,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   minValue?: number;
   maxValue?: number;
   handleChange?: () => void;
+  handleBlur?: () => void;
   values?: string | number | readonly string[];
   id: string;
   name: string;
@@ -29,6 +30,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   label,
   type,
   handleChange,
+  handleBlur,
   error,
   values,
   placeholder,
@@ -44,6 +46,7 @@ export const InputField: React.FC<InputFieldProps> = ({
       min={minValue}
       max={maxValue}
       onChange={handleChange}
+      onBlur={handleBlur}
       value={values}
       {...rest}
     />
@@ -53,7 +56,7 @@ export const InputField: React.FC<InputFieldProps> = ({
 
 const InputElement = styled.input`
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   outline: none;
   padding: 1rem 1rem 0.2rem 1rem;
   width: 100%;
@@ -64,8 +67,13 @@ const InputElement = styled.input`
     appearance: none;
   }
   :focus {
-    border-bottom: 1px solid $orange;
+    border-bottom: 1px solid orange;
   }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+
   && {
     ${color}
   }

@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 import APIservice from '../../service/api-service';
 import { selectAuth, selectState } from 'state/slice';
 import { navigate } from 'gatsby';
+import { BaseButton } from 'components/buttons/elements/BaseButton';
 
 const initialValues = {
   firstName: '',
@@ -27,12 +28,12 @@ const initialValues = {
 
 export const validationSchema = Yup.object({
   firstName: Yup.string().required('Name is required'),
-  lastName: Yup.string().required('Name is required'),
+  lastName: Yup.string().required('Last Name is required'),
   email: Yup.string().email('Email is not valid').required('Email is required'),
   city: Yup.string().required('City name is required'),
   house: Yup.string().required('House number is required'),
   street: Yup.string().required('Street number is required'),
-  zipcode: Yup.string().required('Zip code number is required'),
+  zipcode: Yup.string().required('Zip code is required'),
 });
 
 const RegistrationPage = () => {
@@ -83,7 +84,8 @@ const RegistrationPage = () => {
     onSubmit: handleLogin,
   });
   console.log(values, 'values');
-  // console.log(errors, 'errors');
+  console.log(touched, 'touched');
+  console.log(errors, 'errors');
   const { loggedIn } = useSelector(selectAuth);
   const checkstate = useSelector(selectState);
   console.log(loggedIn, 'logged in');
@@ -98,61 +100,143 @@ const RegistrationPage = () => {
           </Typography>
         </Box>
         <form onSubmit={handleSubmit}>
-          <FlexWrapper flexDirection='column' gap='25px'>
+          <FlexWrapper gap='23px' flexDirection='column'>
+            <FlexWrapper gap='25px'>
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='text'
+                placeholder='First Name'
+                id='firstName'
+                name='firstName'
+                style={
+                  (touched.firstName && errors.firstName) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.firstName && errors.firstName && (
+                <Error style={{ top: '30%', left: '14%' }}>
+                  {errors.firstName}
+                </Error>
+              )}
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='text'
+                placeholder='Last Name'
+                id='lastName'
+                name='lastName'
+                style={
+                  (touched.lastName && errors.lastName) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.lastName && errors.lastName && (
+                <Error style={{ top: '30%', left: '70%' }}>
+                  {errors.lastName}
+                </Error>
+              )}
+            </FlexWrapper>
             <InputField
               onChange={handleChange}
-              type='text'
-              placeholder='First Name'
-              id='firstName'
-              name='firstName'
-            ></InputField>
-            <InputField
-              onChange={handleChange}
-              type='text'
-              placeholder='Last Name'
-              id='lastName'
-              name='lastName'
-            ></InputField>
-          </FlexWrapper>
-          <InputField
-            onChange={handleChange}
-            type='email'
-            placeholder='E-Mail'
-            id='email'
-            name='email'
-          ></InputField>
-          <FlexWrapper gap='25px'>
-            <InputField
-              onChange={handleChange}
-              type='text'
-              placeholder='City'
-              id='city'
-              name='city'
-            ></InputField>
-            <InputField
-              onChange={handleChange}
-              type='text'
-              placeholder='Street'
-              id='street'
-              name='street'
-            ></InputField>
-            <InputField
-              onChange={handleChange}
-              type='number'
-              placeholder='House Number'
-              id='house'
-              name='house'
-            ></InputField>
-            <InputField
-              onChange={handleChange}
-              type='number'
-              placeholder='Zipcode'
-              id='zipcode'
-              name='zipcode'
-            ></InputField>
+              onBlur={handleBlur}
+              type='email'
+              placeholder='E-Mail'
+              id='email'
+              name='email'
+              style={
+                (touched.email && errors.email) || errorMsg
+                  ? { borderBottom: `1px solid red` }
+                  : { borderBottom: `1px solid black` }
+              }
+            />
+            {touched.email && errors.email && (
+              <Error style={{ top: '46%', left: '50%' }}>{errors.email}</Error>
+            )}
+            <FlexWrapper gap='25px'>
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='text'
+                placeholder='City'
+                id='city'
+                name='city'
+                style={
+                  (touched.city && errors.city) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.city && errors.city && (
+                <Error style={{ top: '62%', left: '16%' }}>{errors.city}</Error>
+              )}
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='text'
+                placeholder='Street'
+                id='street'
+                name='street'
+                style={
+                  (touched.street && errors.street) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.street && errors.street && (
+                <Error style={{ top: '62%', left: '69%' }}>{errors.city}</Error>
+              )}
+            </FlexWrapper>
+            <FlexWrapper gap='25px'>
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='number'
+                placeholder='House Number'
+                id='house'
+                name='house'
+                style={
+                  (touched.house && errors.house) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.house && errors.house && (
+                <Error style={{ top: '80%', left: '19%' }}>
+                  {errors.house}
+                </Error>
+              )}
+              <InputField
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type='number'
+                placeholder='Zipcode'
+                id='zipcode'
+                name='zipcode'
+                style={
+                  (touched.zipcode && errors.zipcode) || errorMsg
+                    ? { borderBottom: `1px solid red` }
+                    : { borderBottom: `1px solid black` }
+                }
+              />
+              {touched.zipcode && errors.zipcode && (
+                <Error style={{ top: '80%', left: '69%' }}>
+                  {errors.zipcode}
+                </Error>
+              )}
+            </FlexWrapper>
           </FlexWrapper>
           <FlexWrapper justifyContent='center'>
-            <button type='submit'>okay</button>
+            {/* {errorMsg && (
+              <Error style={{ top: '81.5%', fontSize: `15px` }}>
+                {errorMsg}
+              </Error>
+            )} */}
+            <Box mt='50px'>
+              <BaseButton type='submit'>Register</BaseButton>
+            </Box>
           </FlexWrapper>
         </form>
       </RegistrationFormContainer>
@@ -167,4 +251,15 @@ const RegistrationFormContainer = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const Error = styled.span`
+  position: absolute;
+  font-size: 10px;
+  top: 56%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  display: flex;
+  justify-content: center;
 `;
