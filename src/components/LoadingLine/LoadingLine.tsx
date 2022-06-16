@@ -60,8 +60,8 @@ const Bar = styled.span`
 const Progress = styled.span`
   display: block;
   animation: ${animate} 0.5s ease infinite;
-  background: green;
-  color: white;
+  background: ${theme.colors.green};
+  color: ${theme.colors.white};
   padding: 0.3125rem;
   width: 0;
 `;

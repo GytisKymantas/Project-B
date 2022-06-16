@@ -1,3 +1,20 @@
+import React from 'react';
+
+export interface FetchProps {
+  firstName: string | unknown;
+  lastName: string | unknown;
+  email: string | unknown;
+  city: string | unknown;
+  house: string | unknown;
+  street: string | unknown;
+  zipcode: string | unknown;
+}
+
+type ResponseType = {
+  token?: string;
+  user?: string;
+};
+
 const fakeFetch = ({
   firstName,
   lastName,
@@ -6,7 +23,7 @@ const fakeFetch = ({
   house,
   street,
   zipcode,
-}) =>
+}: FetchProps) =>
   new Promise((success, failure) => {
     setTimeout(() => {
       if (email !== '' && city !== '') {
@@ -37,7 +54,7 @@ const login = async ({
   house,
   street,
   zipcode,
-}) => {
+}: FetchProps) => {
   const response = await fakeFetch({
     firstName,
     lastName,
@@ -47,7 +64,7 @@ const login = async ({
     street,
     zipcode,
   });
-  return response;
+  return response as ResponseType;
 };
 
 export default {

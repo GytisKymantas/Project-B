@@ -1,6 +1,6 @@
-import { Property } from "csstype";
-import React, { ReactNode } from "react";
-import styled from "styled-components/macro";
+import { Property } from 'csstype';
+import React, { ReactNode } from 'react';
+import styled from 'styled-components/macro';
 import {
   compose,
   fontWeight,
@@ -11,33 +11,33 @@ import {
   TypographyProps,
   textStyle,
   typography,
-} from "styled-system";
+} from 'styled-system';
 
-import { Colors, Theme } from "styles/theme";
+import { Colors, Theme } from 'styles/theme';
 
-import { applyTextType } from "./TypographyHelpers";
+import { applyTextType } from './TypographyHelpers';
 
 export type TextType =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "body16"
-  | "caption12"
-  | "span";
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body16'
+  | 'caption12'
+  | 'span';
 
 export enum TextTag {
-  "h1" = "h1",
-  "h2" = "h2",
-  "h3" = "h3",
-  "h4" = "h4",
-  "h5" = "h5",
-  "h6" = "h6",
-  "span" = "span",
-  "body16" = "p",
-  "caption12" = "p",
+  'h1' = 'h1',
+  'h2' = 'h2',
+  'h3' = 'h3',
+  'h4' = 'h4',
+  'h5' = 'h5',
+  'h6' = 'h6',
+  'span' = 'span',
+  'body16' = 'p',
+  'caption12' = 'p',
 }
 
 type AsAttributeType = string | React.ComponentType;
@@ -57,11 +57,11 @@ export interface TextProps extends SpaceProps<Theme>, TypographyProps<Theme> {
   textTransform?: Property.TextTransform; // priims tik tokius
   textDecoration?: Property.TextDecoration;
   onClick?: () => void;
-  children: ReactNode;
+  children?: JSX.Element | JSX.Element[] | string;
 }
 
 export const Typography: React.FC<TextProps> = ({
-  type = "body16",
+  type = 'body16',
   children,
   ...props
 }) => {
@@ -76,23 +76,14 @@ export const Typography: React.FC<TextProps> = ({
 
 const Text = styled.p<TextProps>`
   padding: 0;
-  ${(
-    { type, theme } //destrukturyzuota. Themas globalus/ jeigu paduodam type, prisiraso tada sita funkcija applytexttype
-  ) =>
-    type &&
-    applyTextType(
-      type as TextType,
-      theme as Theme
-    )}; // grazinam tada is switcho
+  ${({ type, theme }) =>
+    type && applyTextType(type as TextType, theme as Theme)};
   color: ${({ theme, color }) =>
-    color
-      ? theme.colors[color]
-      : theme.colors
-          .white}; // jeigu paduodu pareina is theme'o, jei ne tai ne.[] yra objekto key
+    color ? theme.colors[color] : theme.colors.white};
 
   && {
     ${typographyProperties}
   }
-  text-transform: ${({ textTransform }) => textTransform || ""};
-  text-decoration: ${({ textDecoration }) => textDecoration || ""};
+  text-transform: ${({ textTransform }) => textTransform || ''};
+  text-decoration: ${({ textDecoration }) => textDecoration || ''};
 `;

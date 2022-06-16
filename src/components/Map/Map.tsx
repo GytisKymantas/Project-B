@@ -1,14 +1,21 @@
 import React, { useMemo } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { theme } from 'styles/theme';
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
-  marginTop: '20px',
-  borderBottomLeftRadius: '24px',
-  borderBottomRightRadius: '24px',
+  height: '25rem',
+  marginTop: `${theme.space.s20}`,
+  borderBottomLeftRadius: `${theme.radii.br24}`,
+  borderBottomRightRadius: `${theme.radii.br24}`,
 };
-const Map: React.FC = ({ latitude, longitude }) => {
+
+interface MapProps {
+  latitude: number;
+  longitude: number;
+}
+
+const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
   console.log(latitude, longitude);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAiwtIaQV5iz-CowHZoKUVBXLNIL4yNwxA',

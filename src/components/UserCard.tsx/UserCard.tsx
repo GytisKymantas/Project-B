@@ -5,10 +5,16 @@ import { useSelector } from 'react-redux';
 import { selectState } from 'state/slice';
 import { setDelete, loginSuccess } from 'state/slice';
 import Map from 'components/Map/Map';
-
+import { theme } from 'styles/theme';
+import { FetchProps } from 'service/api-service';
 import { useDispatch } from 'react-redux';
 
-export const UserCard = ({
+interface UserCardProps extends FetchProps {
+  zipcode: number;
+  index: number;
+}
+
+export const UserCard: React.FC<UserCardProps> = ({
   firstName,
   lastName,
   email,
@@ -17,8 +23,6 @@ export const UserCard = ({
   house,
   zipcode,
   index,
-  setUserData,
-  userDataClone,
 }) => {
   const [locationData, setLocationData] = useState();
   const state = useSelector(selectState);
@@ -29,10 +33,11 @@ export const UserCard = ({
   const latitude = locationData?.results[0]?.geometry.location.lat;
   const longitude = locationData?.results[0]?.geometry.location.lng;
 
-  console.log(typeof latitude);
-  const bam = userData?.filter(({ firstName }) => firstName !== name);
+  const deleteUser = userData?.filter(
+    ({ firstName }: string) => firstName !== name
+  );
   const deleteGlobal = () => {
-    dispatch(setDelete(bam));
+    dispatch(setDelete(deleteUser));
   };
 
   function getCoordinates() {
@@ -48,14 +53,9 @@ export const UserCard = ({
   useEffect(() => getCoordinates(), []);
 
   return (
-    <Box
-      width='400px'
-      borderRadius='24px'
-      bg='gray'
-      boxShadow='1px 1px 10px black'
-    >
-      <Box p='50px'>
-        <FlexWrapper gap='20px' flexDirection='column'>
+    <Box width='25rem' borderRadius='br24' bg='gray' boxShadow='default'>
+      <Box p='s50'>
+        <FlexWrapper gap='1.25rem' flexDirection='column'>
           <Typography color='primary'>
             Name: {firstName} {lastName}
           </Typography>
@@ -69,7 +69,7 @@ export const UserCard = ({
             <Typography color='primary'>Lng: {longitude}</Typography>
           </FlexWrapper>
         </FlexWrapper>
-        <Box mt='30px'>
+        <Box mt='s30'>
           <BaseButton type='button' onClick={() => deleteGlobal()}>
             Fire employee
           </BaseButton>
