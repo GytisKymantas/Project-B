@@ -15,6 +15,7 @@ import APIservice from '../../service/api-service';
 import { selectAuth, selectState } from 'state/slice';
 import { navigate } from 'gatsby';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
+import { setDelete, logout } from 'state/slice';
 
 const initialValues = {
   firstName: '',
@@ -37,9 +38,19 @@ export const validationSchema = Yup.object({
 });
 
 const RegistrationPage = () => {
+  const { loggedIn } = useSelector(selectAuth);
+  const checkstate = useSelector(selectState);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState(null);
   console.log(errorMsg, 'error msg');
+  console.log(checkstate, 'global state check in');
+
+  // useDispatch(setDelete);
+
+  const testHandle = () => {
+    console.log('clicked');
+    dispatch(setDelete());
+  };
 
   const handleLogin = async ({
     firstName,
@@ -83,16 +94,12 @@ const RegistrationPage = () => {
     validationSchema,
     onSubmit: handleLogin,
   });
-  console.log(values, 'values');
-  console.log(touched, 'touched');
-  console.log(errors, 'errors');
-  const { loggedIn } = useSelector(selectAuth);
-  const checkstate = useSelector(selectState);
-  console.log(loggedIn, 'logged in');
-  console.log(checkstate, 'check in');
 
   return (
     <Box>
+      <button type='button' onClick={() => testHandle()}>
+        click
+      </button>
       <RegistrationFormContainer>
         <Box mb='s16'>
           <Typography textAlign='center' color='primary' type='h5'>

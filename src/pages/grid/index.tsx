@@ -10,22 +10,17 @@ import { Box, FlexWrapper, GridWrapper, Typography } from 'components';
 const grid: React.FC = () => {
   const checkstate = useSelector(selectState);
   const data = checkstate.auth.user;
-  const [userData, setUserData] = useState(data);
-  const userDataClone = userData;
-  console.log(userData, 'state data');
-  // const userDataClone = userData.filter(({ firstName }) => firstName !== 'Gytis');
-  // console.log(bam, 'filtered that is not gytis');
 
   return (
     <Box>
       <RegisteredUsersGrid>
         <Box mb='s16'>
           <Typography type='h3' color='primary' textAlign='center'>
-            Employees {userDataClone.length}
+            Employees {data?.length}
           </Typography>
         </Box>
         <GridWrapper gridTemplateColumns='repeat(2,1fr)' gap='50px'>
-          {userDataClone.map(
+          {data?.map(
             (
               { firstName, lastName, email, city, street, house, zipcode },
               idx
@@ -41,8 +36,8 @@ const grid: React.FC = () => {
                   house={house}
                   zipcode={zipcode}
                   index={idx}
-                  setUserData={setUserData}
-                  userDataClone={userDataClone}
+                  // setUserData={setNewUserData}
+                  // userDataClone={newUserData}
                 />
               );
             }

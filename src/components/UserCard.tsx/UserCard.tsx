@@ -3,6 +3,9 @@ import { Box, FlexWrapper, Typography } from 'components';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
 import { useSelector } from 'react-redux';
 import { selectState } from 'state/slice';
+import { setDelete, loginSuccess } from 'state/slice';
+
+import { useDispatch } from 'react-redux';
 
 export const UserCard = ({
   firstName,
@@ -18,13 +21,13 @@ export const UserCard = ({
 }) => {
   const [locationData, setLocationData] = useState();
   const state = useSelector(selectState);
-  const users = state.auth.user;
-  const name = users[index].firstName;
+  const dispatch = useDispatch();
+  const userData = state.auth.user;
+  const name = userData[index].firstName;
 
-  // const bam = users.filter(({ firstName }) => firstName !== name);
-
-  const handleDelete = () => {
-    setUserData(userDataClone?.filter(({ firstName }) => firstName !== name));
+  const bam = userData?.filter(({ firstName }) => firstName !== name);
+  const deleteGlobal = () => {
+    dispatch(setDelete(bam));
   };
 
   function getCoordinates() {
@@ -60,7 +63,7 @@ export const UserCard = ({
         </FlexWrapper>
       </FlexWrapper>
       <Box mt='30px'>
-        <BaseButton type='button' onClick={() => handleDelete()}>
+        <BaseButton type='button' onClick={() => deleteGlobal()}>
           Fire employee
         </BaseButton>
       </Box>
