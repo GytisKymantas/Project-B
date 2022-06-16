@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { navigate } from 'gatsby';
 import { UserCard } from 'components/UserCard.tsx/UserCard';
-
+import { LoadingLine } from 'components/LoadingLine/LoadingLine';
 import { Box, FlexWrapper, GridWrapper, Typography } from 'components';
 
 const grid: React.FC = () => {
@@ -19,7 +19,12 @@ const grid: React.FC = () => {
             Employees {data?.length}
           </Typography>
         </Box>
-        <GridWrapper gridTemplateColumns='repeat(2,1fr)' gap='50px'>
+        <GridWrapper
+          gridTemplateColumns='repeat(2,1fr)'
+          gap='50px'
+          m='auto'
+          width='850px'
+        >
           {data?.map(
             (
               { firstName, lastName, email, city, street, house, zipcode },
@@ -55,10 +60,11 @@ const grid: React.FC = () => {
 export default grid;
 
 const RegisteredUsersGrid = styled(Box)`
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
+  margin: 50px;
 `;
 
 {

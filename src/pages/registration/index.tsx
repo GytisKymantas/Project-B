@@ -16,6 +16,7 @@ import { selectAuth, selectState } from 'state/slice';
 import { navigate } from 'gatsby';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
 import { setDelete, logout } from 'state/slice';
+import { LoadingLine } from 'components/LoadingLine/LoadingLine';
 
 const initialValues = {
   firstName: '',
@@ -97,9 +98,10 @@ const RegistrationPage = () => {
 
   return (
     <Box>
-      <button type='button' onClick={() => testHandle()}>
+      {/* <button type='button' onClick={() => testHandle()}>
         click
-      </button>
+      </button> */}
+      {isSubmitting && <LoadingLine />}
       <RegistrationFormContainer>
         <Box mb='s16'>
           <Typography textAlign='center' color='primary' type='h5'>

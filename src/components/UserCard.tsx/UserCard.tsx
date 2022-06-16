@@ -43,7 +43,14 @@ export const UserCard = ({
   useEffect(() => getCoordinates(), []);
 
   return (
-    <Box key={firstName} bg='gray' p='50px' width='400px' borderRadius='24px'>
+    <Box
+      key={firstName}
+      bg='gray'
+      p='50px'
+      width='400px'
+      borderRadius='24px'
+      m='0 auto'
+    >
       <FlexWrapper gap='20px' flexDirection='column'>
         <Typography color='primary'>
           Name: {firstName} {lastName}

@@ -26,7 +26,7 @@ const fakeFetch = ({
       } else {
         failure(new Error('Incorect email or/and password'));
       }
-    }, 2000);
+    }, 500);
   });
 
 const login = async ({
