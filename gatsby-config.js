@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   siteMetadata: {
@@ -13,15 +13,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Red Hat Display\:300,400,400,700`],
+        fonts: [`PT Sans\:300,400,400,700`],
         display: `swap`,
       },
     },
     {
-      resolve: "gatsby-plugin-page-creator",
+      resolve: 'gatsby-plugin-page-creator',
       options: {
-        path: path.resolve(__dirname, "src/pages"),
-        ignore: ["**/sections/*", "**/options/*", "**/elements/*"],
+        path: path.resolve(__dirname, 'src/pages'),
+        ignore: ['**/sections/*', '**/options/*', '**/elements/*'],
       },
     },
     {
@@ -32,9 +32,9 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-resolve-src",
+      resolve: 'gatsby-plugin-resolve-src',
       options: {
-        srcPath: path.resolve(__dirname, "src"),
+        srcPath: path.resolve(__dirname, 'src'),
       },
     },
   ],

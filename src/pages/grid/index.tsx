@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { navigate } from 'gatsby';
 import { UserCard } from 'components/UserCard.tsx/UserCard';
-import { LoadingLine } from 'components/LoadingLine/LoadingLine';
 import { Box, FlexWrapper, GridWrapper, Typography } from 'components';
 
 const grid: React.FC = () => {
@@ -14,13 +13,13 @@ const grid: React.FC = () => {
   return (
     <Box>
       <RegisteredUsersGrid>
-        <Box mb='s16'>
+        <Box mb='50px'>
           <Typography type='h3' color='primary' textAlign='center'>
-            Employees {data?.length}
+            Employee count: {data?.length}
           </Typography>
         </Box>
         <GridWrapper
-          gridTemplateColumns='repeat(2,1fr)'
+          gridTemplateColumns='repeat(3,1fr)'
           gap='50px'
           m='auto'
           width='850px'

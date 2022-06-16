@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
         overflow:hidden auto;
     }
     html {
-        font-family: ${theme.fontFamily.primary}
+        font-family: 'PT Sans';
     }
 `;
 
