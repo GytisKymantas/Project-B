@@ -31,6 +31,7 @@ export const theme = {
   },
   breakpoints: ['24rem', '47rem', '90rem'] as unknown as Breakpoints,
   space: {
+    auto: 'auto',
     s16: '16px',
     s20: '20px',
     s30: '30px',

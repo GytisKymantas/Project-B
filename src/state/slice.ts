@@ -61,6 +61,23 @@ const authSlice = createSlice({
   },
 });
 
+// interface IUserDataProps {
+//   city: string;
+//   email: string;
+//   firstName: string;
+//   house: number;
+//   lastName: string;
+//   length: number;
+//   street: string;
+//   zipcode: number;
+//   idx: number;
+// }
+// interface test {
+//   data: IUserDataProps;
+//   auth: string;
+//   user: string[];
+// }
+
 export const { loginSuccess, logout, setDelete } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth;

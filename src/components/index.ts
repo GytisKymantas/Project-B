@@ -7,6 +7,7 @@ export * from './wrappers/FlexWrapper';
 export * from './wrappers/GridWrapper';
 export * from './wrappers/Input';
 export * from './wrappers/SectionWrapper';
+export * from './buttons/elements/BaseButton';
 
 //texts
 // export * from './texts/h1';

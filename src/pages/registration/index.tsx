@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import {
   Box,
   FlexWrapper,
@@ -14,11 +14,31 @@ import * as Yup from 'yup';
 import APIservice from '../../service/api-service';
 import { selectAuth, selectState } from 'state/slice';
 import { navigate } from 'gatsby';
+// import { IUserDataProps } from 'components/UserCard.tsx/UserCard';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
 import { setDelete, logout } from 'state/slice';
 import { LoadingLine } from 'components/LoadingLine/LoadingLine';
 
-const initialValues = {
+interface IUserDataProps {
+  city: string;
+  email: string;
+  firstName: string;
+  house: string;
+  lastName: string;
+  street: string;
+  zipcode: string;
+}
+
+// type Message = {
+//   message: SetStateAction<null>;
+// };
+
+type Error = {
+  error: string;
+  message: SetStateAction<null>;
+};
+
+const initialValues: IUserDataProps = {
   firstName: '',
   lastName: '',
   email: '',
@@ -38,20 +58,13 @@ export const validationSchema = Yup.object({
   zipcode: Yup.string().required('Zip code is required'),
 });
 
-const RegistrationPage = () => {
+const RegistrationPage: React.FC = () => {
   const { loggedIn } = useSelector(selectAuth);
   const checkstate = useSelector(selectState);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState(null);
   console.log(errorMsg, 'error msg');
   console.log(checkstate, 'global state check in');
-
-  // useDispatch(setDelete);
-
-  const testHandle = () => {
-    console.log('clicked');
-    dispatch(setDelete());
-  };
 
   const handleLogin = async ({
     firstName,
@@ -61,7 +74,7 @@ const RegistrationPage = () => {
     house,
     street,
     zipcode,
-  }) => {
+  }: IUserDataProps) => {
     try {
       const { user, token } = await APIservice.login({
         firstName,
@@ -75,7 +88,8 @@ const RegistrationPage = () => {
       const loginSuccesAction = loginSuccess({ user, token });
       dispatch(loginSuccesAction);
       navigate('/grid');
-    } catch (error) {
+    } catch (e) {
+      const error = e as Error;
       setErrorMsg(error.message);
     }
   };
@@ -98,9 +112,6 @@ const RegistrationPage = () => {
 
   return (
     <Box>
-      {/* <button type='button' onClick={() => testHandle()}>
-        click
-      </button> */}
       {isSubmitting && <LoadingLine />}
       <RegistrationFormContainer>
         <Box mb='s16'>
@@ -238,12 +249,7 @@ const RegistrationPage = () => {
             </FlexWrapper>
           </FlexWrapper>
           <FlexWrapper justifyContent='center'>
-            {/* {errorMsg && (
-              <Error style={{ top: '81.5%', fontSize: `15px` }}>
-                {errorMsg}
-              </Error>
-            )} */}
-            <Box mt='50px'>
+            <Box mt='s50'>
               <BaseButton type='submit'>Register</BaseButton>
             </Box>
           </FlexWrapper>

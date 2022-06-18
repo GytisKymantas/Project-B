@@ -8,10 +8,39 @@ import Map from 'components/Map/Map';
 import { theme } from 'styles/theme';
 import { FetchProps } from 'service/api-service';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components/macro';
 
 interface UserCardProps extends FetchProps {
   zipcode: number;
   index: number;
+}
+
+interface ICoords {
+  lat: number;
+  lng: number;
+}
+
+interface ILocation {
+  location: ICoords;
+}
+
+interface IGeometry {
+  geometry: ILocation;
+}
+
+interface IAuth {
+  results: IGeometry[];
+}
+
+export interface IUserDataProps {
+  city: string;
+  email: string;
+  firstName: string;
+  house: number;
+  id: string;
+  lastName: string;
+  street: string;
+  zipcode: number;
 }
 
 export const UserCard: React.FC<UserCardProps> = ({
@@ -24,17 +53,20 @@ export const UserCard: React.FC<UserCardProps> = ({
   zipcode,
   index,
 }) => {
-  const [locationData, setLocationData] = useState();
+  const [locationData, setLocationData] = useState<IAuth>();
+  const [selected, setSelected] = useState(false);
   const state = useSelector(selectState);
+  console.log(locationData, 'this is state');
   const dispatch = useDispatch();
   const userData = state.auth.user;
   const name = userData[index].firstName;
+  console.log(userData, 'user data console');
 
   const latitude = locationData?.results[0]?.geometry.location.lat;
   const longitude = locationData?.results[0]?.geometry.location.lng;
 
   const deleteUser = userData?.filter(
-    ({ firstName }: string) => firstName !== name
+    ({ firstName }: IUserDataProps) => firstName !== name
   );
   const deleteGlobal = () => {
     dispatch(setDelete(deleteUser));
@@ -53,8 +85,14 @@ export const UserCard: React.FC<UserCardProps> = ({
   useEffect(() => getCoordinates(), []);
 
   return (
-    <Box width='25rem' borderRadius='br24' bg='gray' boxShadow='default'>
-      <Box p='s50'>
+    <EmployeeCard
+      width='25rem'
+      borderRadius='br24'
+      onClick={() => setSelected(!selected)}
+      bg={selected ? 'secondary' : 'gray'}
+      boxShadow='default'
+    >
+      <Box p='s50' borderRadius='br24'>
         <FlexWrapper gap='1.25rem' flexDirection='column'>
           <Typography color='primary'>
             Name: {firstName} {lastName}
@@ -78,6 +116,14 @@ export const UserCard: React.FC<UserCardProps> = ({
       <Box>
         <Map latitude={latitude} longitude={longitude} />
       </Box>
-    </Box>
+    </EmployeeCard>
   );
 };
+
+const EmployeeCard = styled(Box)`
+  /* cursor: pointer; */
+  /* width: '25rem';
+  border-radius: ${theme.radii.br24};
+  background: gray;
+  box-shadow: ${theme.shadows.default}; */
+`;

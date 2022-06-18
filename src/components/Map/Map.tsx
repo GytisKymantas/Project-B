@@ -11,12 +11,11 @@ const containerStyle = {
 };
 
 interface MapProps {
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 }
 
 const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
-  console.log(latitude, longitude);
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAiwtIaQV5iz-CowHZoKUVBXLNIL4yNwxA',
   });
@@ -25,10 +24,10 @@ const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
     return (
       <GoogleMap
         zoom={10}
-        center={{ lat: latitude, lng: longitude }}
+        center={{ lat: latitude!, lng: longitude! }}
         mapContainerStyle={containerStyle}
       >
-        <Marker position={{ lat: latitude, lng: longitude }} />
+        <Marker position={{ lat: latitude!, lng: longitude! }} />
       </GoogleMap>
     );
   };
