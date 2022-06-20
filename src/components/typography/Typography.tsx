@@ -54,7 +54,7 @@ const typographyProperties = compose(
 export interface TextProps extends SpaceProps<Theme>, TypographyProps<Theme> {
   color?: Colors;
   type?: TextType;
-  textTransform?: Property.TextTransform; // priims tik tokius
+  textTransform?: Property.TextTransform;
   textDecoration?: Property.TextDecoration;
   onClick?: () => void;
   children?: unknown | string | React.ReactNode | React.ReactNode[];

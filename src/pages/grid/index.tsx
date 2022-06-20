@@ -5,7 +5,6 @@ import styled from 'styled-components/macro';
 import { navigate } from 'gatsby';
 import { UserCard } from 'components/UserCard/UserCard';
 import { theme } from 'styles/theme';
-
 import { Box, BaseButton, GridWrapper, Typography } from 'components';
 
 interface IUserDataProps {

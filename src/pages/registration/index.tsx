@@ -103,8 +103,8 @@ const RegistrationPage: React.FC = () => {
           </Typography>
         </Box>
         <form onSubmit={handleSubmit}>
-          <FlexWrapper gap='23px' flexDirection='column'>
-            <FlexWrapper gap='25px'>
+          <FlexWrapper gap='1.4375rem' flexDirection='column'>
+            <FlexWrapper gap='1.5625rem'>
               <InputField
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -158,7 +158,7 @@ const RegistrationPage: React.FC = () => {
             {touched.email && errors.email && (
               <Error style={{ top: '46%', left: '50%' }}>{errors.email}</Error>
             )}
-            <FlexWrapper gap='25px'>
+            <FlexWrapper gap='1.5625rem'>
               <InputField
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -192,7 +192,7 @@ const RegistrationPage: React.FC = () => {
                 <Error style={{ top: '62%', left: '69%' }}>{errors.city}</Error>
               )}
             </FlexWrapper>
-            <FlexWrapper gap='25px'>
+            <FlexWrapper gap='1.5625rem'>
               <InputField
                 onChange={handleChange}
                 onBlur={handleBlur}
