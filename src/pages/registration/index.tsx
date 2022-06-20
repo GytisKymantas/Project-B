@@ -29,10 +29,6 @@ interface IUserDataProps {
   zipcode: string;
 }
 
-// type Message = {
-//   message: SetStateAction<null>;
-// };
-
 type Error = {
   error: string;
   message: SetStateAction<null>;

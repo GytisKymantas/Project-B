@@ -3,16 +3,10 @@ import { selectState } from 'state/slice';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { navigate } from 'gatsby';
-import { UserCard } from 'components/UserCard.tsx/UserCard';
+import { UserCard } from 'components/UserCard/UserCard';
 import { theme } from 'styles/theme';
 
-import {
-  Box,
-  FlexWrapper,
-  BaseButton,
-  GridWrapper,
-  Typography,
-} from 'components';
+import { Box, BaseButton, GridWrapper, Typography } from 'components';
 
 interface IUserDataProps {
   city: string;
@@ -37,7 +31,7 @@ const Grid: React.FC = () => {
     <Box>
       <RegisteredUsersGrid>
         <Box mb='s50'>
-          <BaseButton type='button' onClick={() => navigate('/registration')}>
+          <BaseButton type='button' onClick={() => navigate('/')}>
             Return to Registration
           </BaseButton>
           <Typography type='h3' color='primary' textAlign='center'>

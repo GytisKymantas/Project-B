@@ -3,34 +3,12 @@ import { Box, FlexWrapper, Typography } from 'components';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
 import { useSelector } from 'react-redux';
 import { selectState } from 'state/slice';
-import { setDelete, loginSuccess } from 'state/slice';
+import { setDelete } from 'state/slice';
 import Map from 'components/Map/Map';
-import { theme } from 'styles/theme';
-import { FetchProps } from 'service/api-service';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/macro';
-
-interface UserCardProps extends FetchProps {
-  zipcode: number;
-  index: number;
-}
-
-interface ICoords {
-  lat: number;
-  lng: number;
-}
-
-interface ILocation {
-  location: ICoords;
-}
-
-interface IGeometry {
-  geometry: ILocation;
-}
-
-interface IAuth {
-  results: IGeometry[];
-}
+import { IAuth } from 'state/types';
+import { UserCardProps } from 'state/types';
 
 export interface IUserDataProps {
   city: string;
@@ -56,11 +34,9 @@ export const UserCard: React.FC<UserCardProps> = ({
   const [locationData, setLocationData] = useState<IAuth>();
   const [selected, setSelected] = useState(false);
   const state = useSelector(selectState);
-  console.log(locationData, 'this is state');
   const dispatch = useDispatch();
-  const userData = state.auth.user;
-  const name = userData[index].firstName;
-  console.log(userData, 'user data console');
+  const userData: IUserDataProps[] = state!.auth!.user!;
+  const name = userData[index]!.firstName!;
 
   const latitude = locationData?.results[0]?.geometry.location.lat;
   const longitude = locationData?.results[0]?.geometry.location.lng;
@@ -92,6 +68,7 @@ export const UserCard: React.FC<UserCardProps> = ({
       bg={selected ? 'secondary' : 'gray'}
       boxShadow='default'
     >
+      <FlexWrapper justifyContent='center' mt='s20'></FlexWrapper>
       <Box p='s50' borderRadius='br24'>
         <FlexWrapper gap='1.25rem' flexDirection='column'>
           <Typography color='primary'>
@@ -121,9 +98,5 @@ export const UserCard: React.FC<UserCardProps> = ({
 };
 
 const EmployeeCard = styled(Box)`
-  /* cursor: pointer; */
-  /* width: '25rem';
-  border-radius: ${theme.radii.br24};
-  background: gray;
-  box-shadow: ${theme.shadows.default}; */
+  cursor: pointer;
 `;

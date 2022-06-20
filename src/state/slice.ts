@@ -4,25 +4,7 @@ import {
   getStorage,
   clearStorage,
 } from '../sessionStorage/SessionStorage';
-
-// const SessionStorage = new (class SessionStorage {
-//   constructor() {
-//     this.storage = window.sessionStorage;
-//   }
-
-//   set(name, value) {
-//     this.storage.setItem(name, JSON.stringify(value));
-//   }
-
-//   get(name) {
-//     const value = this.storage.getItem(name);
-//     return value ? JSON.parse(value) : null;
-//   }
-
-//   clear(name) {
-//     this.storage.removeItem(name);
-//   }
-// })();
+import { InitialStateTypes } from './types';
 
 const initialState = getStorage('auth') ?? {
   loggedIn: false,
@@ -39,47 +21,16 @@ const authSlice = createSlice({
       state.token = payload.token;
       state.user = [...state.user, payload.user];
       setStorage('auth', state);
-
-      // state.redirectTo = payload.redirectTo;
-      // SessionStorage.set('auth', state);
-    },
-    logout(state) {
-      state.loggedIn = false;
-      state.token = null;
-      state.user = [];
-      clearStorage('auth');
-
-      // state.redirectTo = null;
-      // SessionStorage.clear('auth');
     },
     setDelete(state, { payload }) {
       state.user = payload;
-      console.log(payload, 'from setDelete yo');
-      console.log(state, 'from state yo');
       setStorage('auth', state);
     },
   },
 });
 
-// interface IUserDataProps {
-//   city: string;
-//   email: string;
-//   firstName: string;
-//   house: number;
-//   lastName: string;
-//   length: number;
-//   street: string;
-//   zipcode: number;
-//   idx: number;
-// }
-// interface test {
-//   data: IUserDataProps;
-//   auth: string;
-//   user: string[];
-// }
+export const { loginSuccess, setDelete } = authSlice.actions;
 
-export const { loginSuccess, logout, setDelete } = authSlice.actions;
-
-export const selectAuth = (state) => state.auth;
-export const selectState = (state) => state;
+export const selectAuth = (state: InitialStateTypes) => state.auth;
+export const selectState = (state: InitialStateTypes) => state;
 export default authSlice.reducer;

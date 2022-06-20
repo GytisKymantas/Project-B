@@ -6,7 +6,3 @@ export const getStorage = (name: string) => {
   const value = window.sessionStorage.getItem(name);
   return value ? JSON.parse(value) : null;
 };
-
-export const clearStorage = (name: string) => {
-  window.sessionStorage.removeItem(name);
-};
