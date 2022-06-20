@@ -1,18 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  setStorage,
-  getStorage,
-  clearStorage,
-} from '../sessionStorage/SessionStorage';
+import { setStorage, getStorage } from '../sessionStorage/SessionStorage';
 import { InitialStateTypes } from './types';
 
-const initialState = getStorage('auth') ?? {
+export const initialState = getStorage('auth') ?? {
   loggedIn: false,
   token: null,
   user: [],
 };
-console.log(initialState.user, 'global redux');
-const authSlice = createSlice({
+
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {

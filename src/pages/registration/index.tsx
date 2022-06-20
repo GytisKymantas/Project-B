@@ -1,22 +1,15 @@
 import React, { SetStateAction, useState } from 'react';
-import {
-  Box,
-  FlexWrapper,
-  SectionWrapper,
-  InputField,
-  Typography,
-} from 'components';
+import { Box, FlexWrapper, InputField, Typography } from 'components';
 import styled from 'styled-components/macro';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from 'state/slice';
 import * as Yup from 'yup';
 import APIservice from '../../service/api-service';
-import { selectAuth, selectState } from 'state/slice';
+import { selectState } from 'state/slice';
+import { theme } from 'styles/theme';
 import { navigate } from 'gatsby';
-// import { IUserDataProps } from 'components/UserCard.tsx/UserCard';
 import { BaseButton } from 'components/buttons/elements/BaseButton';
-import { setDelete, logout } from 'state/slice';
 import { LoadingLine } from 'components/LoadingLine/LoadingLine';
 
 interface IUserDataProps {
@@ -55,12 +48,9 @@ export const validationSchema = Yup.object({
 });
 
 const RegistrationPage: React.FC = () => {
-  const { loggedIn } = useSelector(selectAuth);
   const checkstate = useSelector(selectState);
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState(null);
-  console.log(errorMsg, 'error msg');
-  console.log(checkstate, 'global state check in');
 
   const handleLogin = async ({
     firstName,
@@ -91,11 +81,8 @@ const RegistrationPage: React.FC = () => {
   };
 
   const {
-    values,
     errors,
     touched,
-    isValid,
-    dirty,
     isSubmitting,
     handleChange,
     handleBlur,
@@ -266,7 +253,7 @@ const RegistrationFormContainer = styled(Box)`
 
 const Error = styled.span`
   position: absolute;
-  font-size: 10px;
+  font-size: ${theme.fontSizes.fs10};
   top: 56%;
   left: 50%;
   transform: translate(-50%, -50%);

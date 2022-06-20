@@ -19,13 +19,10 @@ interface IUserDataProps {
   zipcode: number;
   idx: number;
 }
-interface test {
-  data: IUserDataProps;
-}
 
 const Grid: React.FC = () => {
   const checkstate = useSelector(selectState);
-  const data = checkstate.auth.user;
+  const data: IUserDataProps[] = checkstate!.auth!.user!;
 
   return (
     <Box>
@@ -39,7 +36,11 @@ const Grid: React.FC = () => {
           </Typography>
         </Box>
         <GridWrapper
-          gridTemplateColumns='repeat(3,1fr)'
+          gridTemplateColumns={{
+            _: 'repeat(1,1fr)',
+            ltablet: 'repeat(2,1fr)',
+            desktop: 'repeat(3,1fr)',
+          }}
           gap='3.125rem'
           m='auto'
           width='53.125rem'

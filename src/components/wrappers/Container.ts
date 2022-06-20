@@ -1,14 +1,14 @@
-import styled from "styled-components/macro";
-import { Theme } from "styles/theme";
-import { tablet } from "styles/breakpoints";
-import { Box } from "./Box";
+import styled from 'styled-components/macro';
+import { Theme } from 'styles/theme';
+import { tablet } from 'styles/breakpoints';
+import { Box } from './Box';
 import {
   compose,
   position,
   PositionProps,
   color,
   ColorProps,
-} from "styled-system";
+} from 'styled-system';
 
 const containerProps = compose(position, color);
 
